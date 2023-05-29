@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/common/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/consumerServer/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/consumerServer/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/eurekaServer13000/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/eurekaServer13000/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/eurekaServer13001/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/eurekaServer13001/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/providerServer/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/providerServer/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/providerServer11001/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/providerServer11001/src/main/resources" charset="UTF-8" />
+  </component>
+</project>
