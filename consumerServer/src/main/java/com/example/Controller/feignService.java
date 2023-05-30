@@ -1,6 +1,7 @@
 package com.example.Controller;
 
 import com.example.Feign.UserFeignService;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,12 +24,18 @@ public class feignService {
     }
 
     @PutMapping("/put")
-    public void put(){
-        userFeignService.put();
+    public String put(){
+        return "provider:" + userFeignService.put();
     }
 
     @DeleteMapping("/delete")
-    public void delete(){
-        userFeignService.delete();
+    @RateLimiter(name = "A", fallbackMethod = "deleteFallback")
+    public String delete(){
+        return "provider:" + userFeignService.delete();
+    }
+
+    public String deleteFallback(Exception e) {
+        System.out.println("deleteFallBack");
+        return "业务繁忙!";
     }
 }

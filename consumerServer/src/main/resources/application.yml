@@ -9,3 +9,48 @@ eureka:
   client:
     service-url:
       defaultZone:  http://localhost:13000/eureka,http://localhost:13001/eureka
+
+resilience4j.circuitbreaker:
+  configs:
+    default:
+      failure-rate-threshold: 30 # 断路器打开的失败阈值
+      slidingWindowType: time_based
+      slidingWindowSize: 10 # 滑动窗口大小,单位为次或者秒
+      minimumNumberOfCalls: 5 # 达到这一阈值,才开始计算失败率/慢调用率
+      waitDurationInOpenState: 5000 # 断路器经过多久,从OPEN状态变为HALF_OPEN状态
+      permittedNumberOfCallsInHalfOpenState: 3 # 半开放状态允许通过多少请求
+      slow-call-rate-threshold: 60 # 断路器打开的慢调用阈值
+      slowCallDurationThreshold: 6000 # 超过多少ms的调用算作慢调用
+  instances:
+    A:
+      baseConfig: default
+      failure-rate-threshold: 50 # 断路器打开的失败阈值
+      slidingWindowType: time_based
+      slidingWindowSize: 10 # 滑动窗口大小,单位为次或者秒
+      minimumNumberOfCalls: 5 # 达到这一阈值,才开始计算失败率/慢调用率
+      waitDurationInOpenState: 5000 # 断路器经过多久,从OPEN状态变为HALF_OPEN状态
+      permittedNumberOfCallsInHalfOpenState: 3 # 半开放状态允许通过多少请求
+    B:
+      baseConfig: default
+      failure-rate-threshold: 50 # 断路器打开的失败阈值
+      slow-call-rate-threshold: 30 # 断路器打开的慢调用阈值
+      slowCallDurationThreshold: 2000 # 超过多少ms的调用算作慢调用
+      slidingWindowType: time_based
+      slidingWindowSize: 10 # 滑动窗口大小,单位为次或者秒
+      minimumNumberOfCalls: 5 # 达到这一阈值,才开始计算失败率/慢调用率
+      waitDurationInOpenState: 5000 # 断路器经过多久,从OPEN状态变为HALF_OPEN状态
+      permittedNumberOfCallsInHalfOpenState: 3 # 半开放状态允许通过多少请求
+
+
+resilience4j.bulkhead:
+  instances:
+    A:
+      maxConcurrentCalls: 10 #允许线程并发执行的最大数量为10
+      maxWaitDuration: 20ms #允许线程阻塞的最大等待时间
+#限速器:限制一段时间内的访问数
+resilience4j.ratelimiter:
+  instances:
+    A:
+      limitRefreshPeriod: 2s #周期时长
+      limitForPeriod: 5 #每个周期最多多少请求
+      timeoutDuration: 500ms #没拿到令牌,最多等多久
